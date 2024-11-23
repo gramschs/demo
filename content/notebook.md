@@ -88,12 +88,6 @@ liegt es nur binär vor. Daher müssen wir auch das Modul `dill` benutzen, um es
 zu laden.
 
 ```{code-cell} ipython3
----
-editable: true
-slideshow:
-  slide_type: ''
-tags: [hide-input]
----
 import pandas as pd
 from sklearn.ensemble import RandomForestRegressor 
 
@@ -115,14 +109,14 @@ class SchuheinlagenOrakel:
     maximale_kraft = modell.predict(X)
     """
 
-    def __init__(self, model):
+    def __init__(self):
         """"""
         url = 'https://raw.githubusercontent.com/gramschs/demo/refs/heads/main/content/data/messungen.csv'
         data = pd.read_csv(url)
 
         rfr = RandomForestRegressor(max_depth=8, random_state=42, min_samples_leaf=1)
         rfr.fit(data[['Zellenform', 'Zellengroesse', 'Fuellgrad']], data['Maximale Kraft'])
-        self.model = model
+        self.model = rfr
     
     def predict(self, X):
         """ Prognostiziert die maximale Kraft, die von dem Bauteil aufgenommen werden kann.
@@ -140,7 +134,7 @@ class SchuheinlagenOrakel:
         """
         return self.model.predict(X)
 
-ki_modell = SchuheinlagenOrakel(rfr)
+ki_modell = SchuheinlagenOrakel()
 ```
 
 Als nächstes benutzen wir die eingebaute Hilfe des KI-Systems, um mehr über das
@@ -156,12 +150,7 @@ aushalten kann, basierend auf den Eingabemerkmalen Zellenform, Zellengröße und
 Füllgrad. Die Messung der maximalen Kraft wird dabei durch die Be- und
 Entlastung des Bauteils bestimmt.
 
-```{code-cell} ipython3
-%%HTML
-<video width=100% controls>
-  <source src="https://gramschs.github.io/xai/_images/messung.mp4" type="video/mp4">
-</video>
-```
+![Video der Be- und Entlastungsmessung eines Bauteils](https://gramschs.github.io/xai/_images/messung.mp4)
 
 Video der Be- und Entlastungsmessung eines Bauteils
 (Quelle: Tim Schwitzner).
@@ -210,7 +199,7 @@ maximale_kraft = ki_modell.predict(bauteil)
 print(maximale_kraft)
 ```
 
-Das Bauteil hält eine maximale Kraft von $\pu{42.3 N}$ aus.
+Das Bauteil hält eine maximale Kraft von 42.3 N aus.
 
 Obwohl das Schuheinlagen-Orakel eine Prognose liefert, bleibt das System für uns
 eine **Black Box**. Die innere Struktur des KI-Modells ist nicht transparent;
@@ -248,8 +237,8 @@ besitzt.
 Kehren wir zurück zu dem fiktiven Anwendungsbeispiel und stellen uns vor, die
 Entwickler des Schuheinlagen-Orakels haben das Unternehmen verlassen. Die
 Konstruktionsabteilung möchte nun verstehen, warum für ein 3D-gedrucktes Bauteil
-mit der Zellenform X-Zelle, einer Zellengröße von $\pu{3 mm}$ und einem Füllgrad
-von $\pu{30 \%}$ eine maximale Kraft von $\pu{42.3 N}$ prognostiziert wird. Um
+mit der Zellenform X-Zelle, einer Zellengröße von 3 mm und einem Füllgrad
+von 30 % eine maximale Kraft von 42.3 N prognostiziert wird. Um
 ein KI-Modell erklärbar zu machen, gibt es verschiedene Ansätze. Ein häufig
 verwendetes Verfahren ist **LIME**. LIME ist ein Akronym und steht für
 
@@ -451,13 +440,7 @@ Probieren Sie aus, für welche Steigung $w$ und für welchen y-Achsenabschnitt $
 die lineare Regressionsgerade am besten die Datenpunkte annähert. Das
 R²-Bestimmtheitsmaß wird dabei im Titel angezeigt und sollte möglichst nahe 1 sein.
 
-<iframe src="https://gramschs.github.io/xai/_static/extra/linear_regression.html"
-width=100% height="600" frameborder="0" scrolling="yes"></iframe>
-
-```{code-cell} ipython3
-%%html
-<iframe src="https://gramschs.github.io/xai/_static/extra/linear_regression.html" width=100% height="600px"></iframe>
-```
+![lineare Regression](https://gramschs.github.io/xai/_static/extra/linear_regression.html)
 
 Lineare Regressionsmodelle sind nicht darauf beschränkt, nur *ein* Merkmal als
 Ursache zu betrachten. Wir können auch ein sogenanntes multiples lineares
