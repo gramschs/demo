@@ -29,7 +29,6 @@ ipyleaflet
 matplotlib
 numpy
 pandas
-dill
 plotly
 scikit-learn
 jupyterlab_myst
