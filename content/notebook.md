@@ -27,8 +27,6 @@ Menschen oft schwer nachvollziehbar sind.
 
 ## Lernziele
 
-```{admonition} Lernziele
-:class: goals
 * Sie verstehen, warum **Erklärbarkeit von KI-Modellen** gesellschaftlich
   relevant ist.
 * Sie kennen die Begriffe **White-Box-Modell** und **Black-Box-Modell**.
@@ -39,7 +37,6 @@ Menschen oft schwer nachvollziehbar sind.
   1. **Komplexität** (intrinsische Modelle oder Post-hoc-Methoden),
   2. **Umfang** (global oder lokal) und
   3. **Modellabhängigkeit** (modellspezifisch oder modellagnostisch).
-```
 
 ## Warum brauchen wir erklärbare KI-Modelle?
 
@@ -216,21 +213,19 @@ nachvollziehbar sind. Ist ein KI-Modell undurchsichtig oder sind die
 Eingangsdaten nicht nachvollziehbar, wird das KI-Modell als Black-Box-Modell
 bezeichnet.
 
-```{admonition} Was ist ... ein Black-Box-Modell?
-:class: note
-Ein KI-Modell wird als Black-Box-Modell bezeichnet, wenn es keine transparente
-Entscheidungslogik besitzt oder die Eingangsdaten nicht nachvollziehbar sind.
-```
+**Was ist ... ein Black-Box-Modell?**
+
+*Ein KI-Modell wird als Black-Box-Modell bezeichnet, wenn es keine transparente
+Entscheidungslogik besitzt oder die Eingangsdaten nicht nachvollziehbar sind.*
 
 Das Gegenteil eines Black-Box-Modells ist das sogenannte **White-Box-Modell**.
 Es ist im Kontext der erklärbaren KI folgendermaßen definiert.
 
-```{admonition} Was ist ... ein White-Box-Modell?
-:class: note
-Ein KI-Modell wird als White-Box-Modell bezeichnet, wenn seine
+**Was ist ... ein White-Box-Modell?**
+
+*Ein KI-Modell wird als White-Box-Modell bezeichnet, wenn seine
 Entscheidungslogik transparent ist und es nachvollziehbare Eingangsdaten
-besitzt.
-```
+besitzt.*
 
 ## Das LIME-Modell
 
@@ -250,24 +245,23 @@ White-Box-Modell darstellen. *Modellagnostisch* bedeutet, dass die LIME-Methode
 unabhängig von der Struktur des zugrunde liegenden KI-Modells funktioniert und
 für verschiedene KI-Modelle eingesetzt werden kann.
 
-```{admonition} Wie funktioniert die LIME-Methode?
-:class: notes
-1. *Variation der Daten*: Für ein ausgewähltes Beispiel, die sogenannte
+### Wie funktioniert die LIME-Methode?
+
+1. **Variation der Daten**: Für ein ausgewähltes Beispiel, die sogenannte
    Referenz, erzeugen wir abgewandelte Varianten der Eingabedaten mit kleinen
    Änderungen im Vergleich zum Referenzbeispiel.
-2. *Berechnung der Prognosen*: Für jede dieser leicht abgeänderten Eingabedaten
+2. **Berechnung der Prognosen**: Für jede dieser leicht abgeänderten Eingabedaten
    berechnen wir mit dem ursprünglichen KI-Modell eine Prognose.
-3. *Gewichtung der Eingabedaten*: Die abgeänderten Eingabedaten werden
+3. **Gewichtung der Eingabedaten**: Die abgeänderten Eingabedaten werden
    gewichtet. Je ähnlicher eine Datenpunkt zur Referenz ist, desto höher ist das
    Gewicht.
-4. *Training eines Ersatzmodells*: Wir trainieren ein einfaches, gut
+4. **Training eines Ersatzmodells**: Wir trainieren ein einfaches, gut
    interpretierbares Ersatzmodell (z.B. ein lineares Regressionsmodell oder einen
    Entscheidungsbaum) auf den gewichteten, leicht abgeänderten Eingabedaten. Die
    Prognosen des ursprünglichen Modells sind dabei die Ausgabedaten.
-5. *Erklärung der Prognose*: Da das Ersatzmodell aus Schritt 4 ein
+5. **Erklärung der Prognose**: Da das Ersatzmodell aus Schritt 4 ein
    White-Box-Modell ist, können wir es nun benutzen, um das Black-Box-KI-Modell
    lokal zu erklären.
-```
 
 Obwohl für das LIME-Modell, das erstmals 2016 vorgestellt wurde
 {cite}`ribeiro:2016`, ein Python-Modul namens
@@ -434,13 +428,14 @@ Bestimmtheitsmaß](https://de.wikipedia.org/wiki/Bestimmtheitsmaß)).
 Normalerweise liegt das R²-Bestimmtheitsmaß zwischen 0 und 1, wobei ein Wert von
 Eins perfekt wäre, aber es kann auch negativ werden.
 
-**Interaktive Bestimmung des linearen Regressionsmodells**
+Probieren Sie aus,
 
-Probieren Sie aus, für welche Steigung $w$ und für welchen y-Achsenabschnitt $b$
+> [Interaktive Bestimmung des linearen Regressionsmodells](https://gramschs.github.io/xai/_static/extra/linear_regression.html)
+
+für welche Steigung $w$ und für welchen y-Achsenabschnitt $b$
 die lineare Regressionsgerade am besten die Datenpunkte annähert. Das
-R²-Bestimmtheitsmaß wird dabei im Titel angezeigt und sollte möglichst nahe 1 sein.
-
-![lineare Regression](https://gramschs.github.io/xai/_static/extra/linear_regression.html)
+R²-Bestimmtheitsmaß wird dabei im Titel angezeigt und sollte möglichst nahe 1
+sein.
 
 Lineare Regressionsmodelle sind nicht darauf beschränkt, nur *ein* Merkmal als
 Ursache zu betrachten. Wir können auch ein sogenanntes multiples lineares
